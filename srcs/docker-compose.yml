@@ -1,0 +1,65 @@
+version: '3'
+
+services:
+
+  nginx:
+    build: ./requirements/nginx
+    hostname: bde-meij.42.fr
+    container_name: nginx
+    restart: always
+    volumes:
+      - /home/bde-meij/data/wordpress:/var/www/wordpress
+      - /home/bde-meij/data/nginx:/var/log/nginx
+    ports:
+      - 443:443
+    networks:
+      - basnet
+      
+  mariadb:
+    build: ./requirements/mariadb
+    env_file: .env
+    init: true
+    container_name: mariadb
+    restart: always
+    volumes:
+      - /home/bde-meij/data/mariadb/data:/var/lib/mysql
+      - /home/bde-meij/data/mariadb/config:/etc/mysql/conf.d
+      - /home/bde-meij/data/mariadb/logs:/var/log/mysql
+    networks:
+      - basnet
+
+  wordpress:
+    build: ./requirements/wordpress
+    env_file: .env
+    init: true
+    container_name: wordpress
+    restart: always
+    volumes:
+    - wordpress:/var/www/wordpress
+    networks:
+    - basnet
+    depends_on: 
+    - mariadb
+    image: wordpress:1.0
+    expose:
+    - 9000
+
+volumes:
+
+  wordpress:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: bind
+      device: '/home/bde-meij/data/wordpress'
+
+  mariadb:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: bind
+      device: '/home/bde-meij/data/mariadb'
+
+networks:
+  basnet:
+    name: basnet

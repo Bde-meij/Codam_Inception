@@ -1,0 +1,17 @@
+[server]
+
+[mysqld]
+user            = mysql
+pid-file        = /var/run/mysqld/mysqld.pid
+socket          = /var/run/mysqld/mysqld.sock
+port            = 3306
+datadir         = /var/lib/mysql
+tmpdir          = /tmp
+bind-address    = 0.0.0.0
+skip-networking = false
+
+[galera]
+[embedded]
+[mariadb]
+[mariadb-10.5]
+
