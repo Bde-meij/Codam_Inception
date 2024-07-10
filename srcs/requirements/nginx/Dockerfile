@@ -16,14 +16,10 @@ RUN openssl req\
     -keyout /etc/nginx/ssl/inception.key \
     -subj "/C=NL/ST=Noord-Holland/L=Amsterdam/O=Codam/CN=bde-meij.42.fr"
 
-# COPY conf/nginx.conf /etc/nginx/nginx.conf
-
-# wordpress permission
-# RUN chmod 755 /var/www/html
-# RUN chown -R www-data:www-data /var/www/html
-
-# run
-# EXPOSE 443
+# wild guess
+COPY conf/nginx.conf /etc/nginx/nginx.conf
+RUN chmod 755 /var/www/html
+RUN chown -R www-data:www-data /var/www/html
 
 ENTRYPOINT ["nginx"]
 CMD ["-g", "daemon off;"]

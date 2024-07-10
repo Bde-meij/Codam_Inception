@@ -1,6 +1,6 @@
-wappie:
-	sudo docker build -t wappie .
-	sudo docker run -it wappie
+x:
+	sudo docker build -t x .
+	sudo docker run -it x
 
 clean:
 	-sudo docker rm $$(sudo docker ps -aq)
