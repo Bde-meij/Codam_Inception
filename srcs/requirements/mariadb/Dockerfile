@@ -1,18 +1,22 @@
-FROM alpine:3.18
+FROM debian:bullseye
 
-RUN sleep 10
-RUN apk update
-RUN apk upgrade
-RUN apk add bash
-RUN apk add mariadb
-RUN apk add mariadb-client
+RUN apt-get update
+RUN apt-get upgrade -y
+RUN apt-get install mariadb-server -y
+#kan geen terminal besturen zonder deze client
+# RUN apt-get install mariadb-client -y
 
-COPY conf/maria.cnf /etc/my.cnf.d/mariadb-server.cnf
-COPY conf/start.sh /root/start.sh
+# COPY conf/maria.cnf /etc/my.cnf.d/mariadb-server.cnf
+# COPY conf/start.sh /root/start.sh
 
-WORKDIR /root/
+# WORKDIR /root/
 
-RUN mkdir -p /run/mysqld
-RUN chown -R mysql:mysql /run/mysqld /var/lib/mysql
-CMD sh start.sh
-EXPOSE 3306/tcp
+# is mogelijk om hier de database te bouwen in plaats 
+# van dat het aangestuurd wordt door WP
+
+# RUN chmod 0777 start.sh
+# RUN mkdir -p /run/mysqld
+# RUN chown -R mysql:mysql /run/mysqld /var/lib/mysql
+# CMD sh start.sh
+# EXPOSE 3306
+RUN touch /var/lib/mysql/initialized
