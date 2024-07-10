@@ -1,10 +1,10 @@
-#!/bin/bash
+#!/bin/sh
 
 # this is wordpress to mariadb communication
 # mariadb gets properly set up to function for wordpress
 
 sleep 5
-if [ ! -f "/var/www/wordpress/wp-config.php" ]; then
+if [ ! -f "/var/www/wordpress/" ]; then
 	cd '/var/www/wordpress'
 
 	echo "create config"

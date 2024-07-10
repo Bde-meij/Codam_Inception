@@ -4,7 +4,7 @@ VOL_MARIADB = /home/bde-meij/data/mariadb
 all: up
 
 up: $(VOL_WORDPRESS) $(VOL_MARIADB)
-	sudo docker compose -f ./srcs/docker-compose.yml up 
+	sudo docker compose -f ./srcs/docker-compose.yml up -d
 
 down:
 	sudo docker compose -f ./srcs/docker-compose.yml down

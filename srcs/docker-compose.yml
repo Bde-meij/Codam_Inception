@@ -75,3 +75,5 @@ networks:
 #   args:
 #   - name=name
 #   - pass=pass
+
+# order of construction should be mariadb, wordpress, enginx
