@@ -1,0 +1,78 @@
+general readme
+
+start an empty container with "sudo docker build -t 'name' ."
+requires dockerfile with at least an OS imported. 
+example: FROM debian:bullseye
+
+enter this abomination with sudo docker run -it 'name' sh
+
+from here run commands to setup the setup
+
+to get into mariadb
+mysql -u root -p
+mariadb -u root -p -h localhost
+
+-- Show existing databases
+SHOW DATABASES;
+-- Create new database;
+CREATE DATABASE IF NOT EXISTS name;
+-- Switch to database
+USE name;
+-- Alter database
+ALTER DATABASE name
+    CHARACTER SET setname    -- Changes the character set of the database and its default collation.
+    COLLATE collationname    -- Changes the default collation for the database.
+    DEFAULT CHARACTER SET setname    -- Sets the default character set for the database.
+    DEFAULT COLLATE collationname    -- Sets the default collation for the database.
+    DEFAULT ENCRYPTION [=] { 'Y' | 'N' }    -- Sets the default encryption for new tables in the database.
+    DEFAULT STORAGE ENGINE storage_engine_name    -- Sets the default storage engine for the database.
+    RENAME TO new_database_name    -- Renames the database.
+    UPGRADE DATA DIRECTORY NAME    -- Upgrades the data directory name for the database.
+    DEFAULT TABLE ENCRYPTION [=] { 'Y' | 'N' }    -- Sets the default table encryption for the database.
+    UPGRADE    -- Upgrades the database to a new version.
+    CONNECTION LIMIT max_connections    -- Sets the maximum number of simultaneous client connections allowed to the database.
+    MAX_CONNECTIONS_PER_HOUR max_connections    -- Sets the maximum number of connections allowed per hour from a single host to the database.
+    MAX_QUERIES_PER_HOUR max_queries    -- Sets the maximum number of queries allowed per hour from a single host to the database.
+    MAX_UPDATES_PER_HOUR max_updates    -- Sets the maximum number of updates (inserts, deletes, updates) allowed per hour from a single host to the database.
+    MAX_USER_CONNECTIONS max_connections;    -- Sets the maximum number of simultaneous connections allowed for any user account to the database.
+-- Delete database
+DROP DATABASE name;
+
+-- Show existing tables in a database
+SHOW TABLES;
+-- Show table structure
+DESCRIBE name;
+SHOW COLUMNS FROM name;
+-- Show table contents
+SELECT * FROM name;
+-- Create a new table (requires at least 1 column)
+CREATE TABLE IF NOT EXISTS name    --colname datatype constraint
+(
+    id INT PRIMARY KEY,    -- number, used as primary key
+    name VARCHAR(23) NOT NULL, -- character string, cannot be empty
+    uniquename VARCHAR(42) UNIQUE    -- character string, must be unique
+);
+-- Rename table
+RENAME TABLE oldname TO newname;
+-- Alter table
+ALTER TABLE name
+    ADD colname datatype constraints    -- Add a new column to the table
+    MODIFY colname datatype constraints    -- Modify a column in the table
+    CHANGE oldcolname newcolname datatype constraints    -- Modify column name
+    DROP COLUMN colname;    -- Remove column from table
+-- Inject information row
+INSERT INTO name (id, uniquename, name)
+VALUES    (1, 'ipsum', 'Lorem'),
+    (2, 'dolor', 'Lorem'),
+    (3, 'sit', 'Lorem');
+-- Remove information row
+DELETE FROM name WHERE condition;    -- condition example: id = 2
+-- Truncate table (clear rows)
+TRUNCATE TABLE name;
+-- Remove table
+DROP TABLE name;
+
+mariadb cmds
+
+- mariadb wpdb
+- SHOW TABLES; geeft tafels

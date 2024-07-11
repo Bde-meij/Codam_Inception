@@ -2,6 +2,14 @@ version: '3'
 
 services:
 
+  main_imports:
+    container_name: mainimp
+    image: mainimp:imports
+    build:
+      context: ./requirements/main_imports
+      dockerfile: Dockerfile
+    restart: always
+
   nginx:
     container_name: nginx
     volumes:
@@ -11,6 +19,7 @@ services:
     ports:
     - 443:443
     depends_on:
+    - main_imports
     - wordpress
     build:
       context: ./requirements/nginx/
@@ -27,6 +36,8 @@ services:
     - inception
     expose:
     - 3306
+    depends_on:
+    - main_imports
     build:
       context: ./requirements/mariadb/
       dockerfile: Dockerfile
@@ -42,7 +53,8 @@ services:
     - inception
     expose:
     - 9000
-    depends_on: 
+    depends_on:
+    - main_imports
     - mariadb
     build: 
       context: ./requirements/wordpress/

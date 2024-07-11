@@ -1,7 +1,0 @@
-wappie:
-	sudo docker build -t wappie .
-	sudo docker run -it wappie
-
-clean:
-	-sudo docker rm $$(sudo docker ps -aq)
-	-sudo docker rmi $$(sudo docker images -aq)

@@ -1,7 +1,10 @@
-FROM debian:bullseye
+# FROM debian:bullseye
 
-RUN apt-get update
-RUN apt-get upgrade -y
+# RUN apt-get update
+# RUN apt-get upgrade -y
+
+FROM mainimp:imports
+
 RUN apt-get install mariadb-server -y
 
 #kan geen terminal besturen zonder deze client

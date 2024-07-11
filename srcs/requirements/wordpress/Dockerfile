@@ -1,7 +1,9 @@
-FROM debian:bullseye
+# FROM debian:bullseye
 
-RUN apt-get update
-RUN apt-get upgrade -y
+# RUN apt-get update
+# RUN apt-get upgrade -y
+
+FROM mainimp:imports
 
 RUN apt-get install php-fpm -y
 RUN apt-get install php-mysqli -y
@@ -23,7 +25,7 @@ RUN chmod +x wp-cli.phar
 RUN mv wp-cli.phar /usr/local/bin/wp
 
 RUN mkdir -p /run/php
-COPY tools/script.sh /root/script.sh
+COPY conf/script.sh /root/script.sh
 WORKDIR /root/
 RUN chmod 0777 script.sh
 
