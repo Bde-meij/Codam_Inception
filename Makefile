@@ -11,6 +11,7 @@ down:
 
 re: clean up
 
+# enter specific container commandline interface during runtime
 db:
 	sudo docker exec -it mariadb bash
 
@@ -32,13 +33,8 @@ $(VOL_MARIADB):
 clean: down
 	-sudo docker stop $$(sudo docker ps -aq)
 	yes | sudo docker system prune -a
+	
+fclean: clean
 	yes | sudo docker volume prune
 	-sudo rm -rf $(VOL_WORDPRESS)
 	-sudo rm -rf $(VOL_MARIADB)
-
-# -sudo docker rm $$(sudo docker ps -aq)
-# -sudo docker rmi $$(sudo docker images -aq)
-# execution style
-# sudo docker exec -it nginx sh
-# sudo docker exec -it mariadb sh
-# sudo docker exec -it wordpress sh

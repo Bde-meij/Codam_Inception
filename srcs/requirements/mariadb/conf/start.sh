@@ -1,5 +1,7 @@
 #!/bin/sh
-# If the database doesn't already exist initialize the database and users
+
+# required initializations for database
+
 if [ ! -d "/var/lib/mysql/$DBNAME" ]; then
 	echo "FLUSH PRIVILEGES;" > init.sql
 	echo "CREATE DATABASE IF NOT EXISTS \`$DBNAME\`;" >> init.sql
@@ -8,11 +10,7 @@ if [ ! -d "/var/lib/mysql/$DBNAME" ]; then
 	echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '$DBROOTPASS';" >> init.sql
 	echo "FLUSH PRIVILEGES;" >> init.sql
 
-	# cat init.sql
-
-	# run mariadbd while giving init.sql as input to initialize the database
 	mariadbd --bootstrap < init.sql
 fi
 
-# Run mariadbd
 mariadbd

@@ -1,11 +1,5 @@
-# FROM debian:bullseye
-
-# RUN apt-get update
-# RUN apt-get upgrade -y
-
 FROM mainimp:imports
 
-# get enginx
 RUN apt-get install nginx -y
 
 # for security set up SSL (secure socket layers)
@@ -18,8 +12,10 @@ RUN openssl req\
     -keyout /etc/nginx/ssl/inception.key \
     -subj "/C=NL/ST=Noord-Holland/L=Amsterdam/O=Codam/CN=bde-meij.42.fr"
 
-# wild guess
 COPY conf/nginx.conf /etc/nginx/nginx.conf
+
+# kept having permission issues,
+# probably don't need both
 RUN chmod 755 /var/www/html
 RUN chown -R www-data:www-data /var/www/html
 

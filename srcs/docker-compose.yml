@@ -1,5 +1,7 @@
 version: '3'
 
+# order of construction should be mainimps -> (mariadb -> wordpress -> enginx)
+
 services:
 
   main_imports:
@@ -82,10 +84,3 @@ volumes:
 networks:
   inception:
     name: inception
-
-# can set args for containers
-#   args:
-#   - name=name
-#   - pass=pass
-
-# order of construction should be mariadb, wordpress, enginx

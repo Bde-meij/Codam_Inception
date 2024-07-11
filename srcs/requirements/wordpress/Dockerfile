@@ -1,13 +1,7 @@
-# FROM debian:bullseye
-
-# RUN apt-get update
-# RUN apt-get upgrade -y
-
 FROM mainimp:imports
 
 RUN apt-get install php-fpm -y
 RUN apt-get install php-mysqli -y
-# RUN apt-get install curl -y
 RUN apt-get install wget -y
 RUN apt-get install mariadb-client -y
 
@@ -19,7 +13,7 @@ RUN cd /var/www && tar -xzf wordpress-6.4.3.tar.gz && rm wordpress-6.4.3.tar.gz
 RUN chown -R root:root /var/www/wordpress
 
 # command line interface so wp can
-# send instructions to mariadb
+# send instructions to mariadb (see scriptSH)
 RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 RUN chmod +x wp-cli.phar
 RUN mv wp-cli.phar /usr/local/bin/wp
