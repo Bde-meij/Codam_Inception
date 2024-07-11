@@ -2,7 +2,6 @@ FROM mainimp:imports
 
 RUN apt-get install mariadb-server -y
 
-
 COPY conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
 COPY conf/start.sh /root/start.sh
 

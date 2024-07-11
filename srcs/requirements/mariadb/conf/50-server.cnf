@@ -1,4 +1,4 @@
-
+#took original .cnf after mariabuild, then modified
 [server]
 
 [mysqld]
